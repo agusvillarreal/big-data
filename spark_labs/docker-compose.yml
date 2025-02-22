@@ -15,6 +15,8 @@ services:
       - SPARK_SSL_ENABLED=no
     command: "/opt/spark/bin/spark-class org.apache.spark.deploy.master.Master"
     container_name: spark-master
+    volumes:
+      - ./data:/data
 
   spark-worker:
     image: apache/spark:3.5.4-scala2.12-java11-python3-ubuntu
@@ -33,8 +35,10 @@ services:
     #   - "8081:8081"      # Worker UI
     command: "/opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077"
     deploy:
-      replicas: 5
+      replicas: 3
     # container_name: spark-worker
+    volumes:
+      - ./data:/data
 
   jupyter-spark:
     build: .
@@ -43,6 +47,7 @@ services:
       - "4040-4050:4040-4050"      # Spark UI
     volumes:
       - ./workspace:/workspace
+      - ./data:/data
     environment:
       - JUPYTER_ENABLE_LAB=yes    # Enable JupyterLab
       - SPARK_MASTER=spark://spark-master:7077

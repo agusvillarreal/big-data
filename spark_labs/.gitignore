@@ -1,2 +1,5 @@
 workspace/*
 !workspace/.gitkeep
+
+*.csv
+/data
