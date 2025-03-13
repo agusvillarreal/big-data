@@ -25,8 +25,8 @@ services:
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_CORES=1
-      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=3
+      - SPARK_WORKER_MEMORY=4G
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_RPC_ENCRYPTION_ENABLED=no
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
@@ -51,8 +51,8 @@ services:
     environment:
       - JUPYTER_ENABLE_LAB=yes    # Enable JupyterLab
       - SPARK_MASTER=spark://spark-master:7077
-      - SPARK_DRIVER_MEMORY=1g
-      - SPARK_EXECUTOR_MEMORY=1g
+      - SPARK_DRIVER_MEMORY=2g
+      - SPARK_EXECUTOR_MEMORY=4g
       - JUPYTER_TOKEN=token-uag
     depends_on:
       - spark-master

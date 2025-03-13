@@ -15,7 +15,9 @@ RUN pip3 install --no-cache-dir \
     pyspark==3.5.4 \
     pandas \
     numpy \
-    matplotlib
+    matplotlib \
+    panel \
+    watchfiles
 
 # Create working directory with permissive permissions
 WORKDIR /workspace
