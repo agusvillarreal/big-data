@@ -16,6 +16,11 @@ RUN pip3 install --no-cache-dir \
     pandas \
     numpy \
     matplotlib \
+    seaborn \
+    scipy \
+    ipympl \ 
+    scikit-learn \
+    statsmodels \
     panel \
     watchfiles
 
