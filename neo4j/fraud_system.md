@@ -331,14 +331,18 @@ Now that we have our graph database populated, let's explore common fraud detect
 Structuring is a technique used to avoid transaction reporting requirements by breaking large transactions into multiple smaller ones, each just under the reporting threshold (typically $10,000).
 
 ```cypher
+
 // Find multiple transactions just under $10,000 between the same accounts in a short time period
 MATCH (sender:Account)-[:SENT]->(t:Transaction)-[:RECEIVED_BY]->(receiver:Account)
 WHERE t.amount > 8000 AND t.amount < 10000
 WITH sender, receiver, collect(t) AS transactions
 WHERE size(transactions) >= 3
-RETURN sender, receiver, transactions,
-       sum(transaction IN transactions | transaction.amount) AS totalAmount,
-       size(transactions) AS transactionCount;
+WITH sender, receiver, transactions, size(transactions) AS transactionCount
+UNWIND transactions AS transaction
+WITH sender, receiver, collect(transaction) AS transactions, 
+     SUM(transaction.amount) AS totalAmount,
+     transactionCount
+RETURN sender, receiver, transactions, totalAmount, transactionCount;
 
 // Visualize the structuring pattern
 MATCH (sender:Account)-[:SENT]->(t:Transaction)-[:RECEIVED_BY]->(receiver:Account)

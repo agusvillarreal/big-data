@@ -1,5 +1,10 @@
 # Neo4j and Cypher: A Practical Guide
 
+```cypher
+// This will delete ALL data in the current database
+MATCH (n) DETACH DELETE n;
+````
+
 ## Introduction to Graph Databases
 
 Graph databases are designed to work with highly connected data where relationships are as important as the data itself. While traditional databases excel at tabular data, graph databases shine when dealing with networks of information.
