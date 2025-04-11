@@ -3,3 +3,9 @@ workspace/*
 
 *.csv
 /data
+
+venv
+*venv
+env
+/env
+/venv

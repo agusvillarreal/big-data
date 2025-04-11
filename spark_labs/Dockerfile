@@ -1,12 +1,12 @@
 FROM apache/spark:3.5.4-scala2.12-java11-python3-ubuntu
 
-
 USER root
 
 # Install necessary packages
 RUN apt-get update && apt-get install -y \
     python3-pip \
     python3-dev \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 # Install JupyterLab and PySpark
@@ -22,7 +22,9 @@ RUN pip3 install --no-cache-dir \
     scikit-learn \
     statsmodels \
     panel \
-    watchfiles
+    watchfiles \
+    kafka-python \
+    findspark
 
 # Create working directory with permissive permissions
 WORKDIR /workspace
